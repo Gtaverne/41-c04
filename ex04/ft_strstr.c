@@ -6,30 +6,32 @@
 /*   By: gtaverne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 22:39:54 by gtaverne          #+#    #+#             */
-/*   Updated: 2020/09/17 12:18:25 by gtaverne         ###   ########.fr       */
+/*   Updated: 2020/09/20 21:01:08 by gtaverne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strstr(char *str, char *to_find)
 {
-	int iter;
-	int ln;
-	int i;
+	int	i;
+	int	j;
 
-	ln = 0;
-	while (to_find[ln])
-		ln++;
-	if (to_find == '\0')
+	if (!str || !to_find)
+		return (NULL);
+	if (to_find[0] == 0)
 		return (str);
-	iter = 0;
-	while (str[iter])
+	i = 0;
+	j = 0;
+	while (str[i])
 	{
-		i = 0;
-		while (str[iter + i] == to_find[i] && i < ln)
-			i++;
-		if (i == ln)
-			return (str + iter);
-		iter++;
+		if (str[i] == to_find[j])
+		{
+			while (to_find[j] && str[i + j] && str[i + j] == to_find[j])
+				j++;
+			if (to_find[j] == 0)
+				return (&str[i]);
+			j = 0;
+		}
+		i++;
 	}
-	return (0);
+	return (NULL);
 }
